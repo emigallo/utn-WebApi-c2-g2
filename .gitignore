@@ -25,6 +25,7 @@
 /CalculatorWeb/obj/Debug/net5.0
 /CalculatorWeb/obj/Release/net5.0
 /CalculatorWeb/obj
+/CalculatorWeb/bin/Debug/net5.0
 /ProyectoCalculadora/Api/obj/Debug/net5.0/.NETCoreApp,Version=v5.0.AssemblyAttributes.cs
 /ProyectoCalculadora/Api/obj/Debug/net5.0/Api.csproj.AssemblyReference.cache
 /ProyectoCalculadora/Api/obj/Release/net5.0/.NETCoreApp,Version=v5.0.AssemblyAttributes.cs
@@ -33,3 +34,4 @@
 /.vs/utn-WebApi-c2-g2/v16/.suo
 /CalculatorAPI/.vs/CalculatorAPI/v16/.suo
 /.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite-journal
