@@ -16,10 +16,18 @@
                 }
             </div>
         }
+
+        <input type="text" name="model.TodoLoIngresado" value="@Model.TodoLoIngresado" />
+
+        <input type="text" name="model.Numeros" value="@Model.Numeros.Last()" />
+
         <input style="visibility:hidden;" id="lastInput" name="lastInput" />
+
     </div>
 
-    <script>window.addEventListener('load', (event) => {
+    <script>
+
+        window.addEventListener('load', (event) => {
 
             document.querySelectorAll('button').forEach(function (item) {
                 item.addEventListener('click', (event) => {
@@ -27,5 +35,6 @@
                     document.querySelector('#lastInput').value = event.target.dataset.value;
                 });
             });
-        });</script>
+        });
+    </script>
 }

@@ -69,7 +69,8 @@ namespace CalculatorWeb.Controllers
 
             if (int.TryParse(lastInput, out int number))
             {
-
+                model.TodoLoIngresado += lastInput;
+                model.Numeros.Add(number);
             }
 
             return View("Calc", model);
