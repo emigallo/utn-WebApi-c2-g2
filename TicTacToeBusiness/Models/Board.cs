@@ -20,9 +20,11 @@ namespace TicTacToeBusiness
         private char[,] myBoard;
 
         // 2
-        public List<List<char>> Rows { get; set; }
+        private List<List<char>> Rows { get; set; }
 
         // 3
-        public List<int> Positions { get; set; }
+        private List<int> Positions { get; set; }
+
+        // 
     }
 }

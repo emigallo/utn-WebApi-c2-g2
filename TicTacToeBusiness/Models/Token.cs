@@ -1,7 +1,8 @@
 ﻿namespace TicTacToeBusiness.Models
 {
-    public class Token
+    public enum Token
     {
-        public string Type { get; set; }
+        Cross,
+        Circle
     }
 }
