@@ -1,4 +1,6 @@
-﻿using TicTacToeBusiness.Models;
+﻿using Business.Util;
+using System;
+using TicTacToeBusiness.Models;
 
 namespace TicTacToeBusiness
 {
@@ -11,22 +13,23 @@ namespace TicTacToeBusiness
 
         private int[] Positions { get; set; }
 
-        public bool AddToken(Player player, int position)
+        public string AddToken(Player player, int position)
         {
             if (position < 0 || position > 8)
             {
-                return false;
+                throw new InvalidPositionException();
             }
 
             if (Positions[position] == 0)
             {
                 Positions[position] = ((int)player.Token);
 
-                return true;
+                return "Ficha colocada, turno del siguiente jugador";
             }
 
             // Casilla ocupada
-            return false;
+            throw new PositionHeldException();  
+
         }
 
         public void Reset()
