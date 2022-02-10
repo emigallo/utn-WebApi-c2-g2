@@ -2,7 +2,13 @@
 {
     public class Player
     {
-        public string Name { get; set; }
+        public Player(string name, Token token)
+        {
+            Name = name;
+            Token = token;
+        }
+
+        private string Name { get; set; }
         public Token Token { get; set; }
     }
 }

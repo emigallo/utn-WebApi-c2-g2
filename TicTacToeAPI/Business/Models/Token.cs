@@ -2,7 +2,7 @@
 {
     public enum Token
     {
-        Cross,
+        Cross = 1,
         Circle
     }
 }

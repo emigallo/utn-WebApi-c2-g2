@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using TicTacToeBusiness.Models;
 
 namespace TicTacToeBusiness
 {
@@ -6,25 +6,37 @@ namespace TicTacToeBusiness
     {
         public Board()
         {
-            myBoard = new char[3, 3];
-
-            Rows = new List<List<char>>
-            {
-                new List<char>() { ' ', ' ', ' ' },
-                new List<char>() { ' ', ' ', ' ' },
-                new List<char>() { ' ', ' ', ' ' }
-            };
+            Positions = new int[8];
         }
 
-        // 1
-        private char[,] myBoard;
+        private int[] Positions { get; set; }
 
-        // 2
-        private List<List<char>> Rows { get; set; }
+        public bool AddToken(Player player, int position)
+        {
+            if (position < 0 || position > 8)
+            {
+                return false;
+            }
 
-        // 3
-        private List<int> Positions { get; set; }
+            if (Positions[position] == 0)
+            {
+                Positions[position] = ((int)player.Token);
 
-        // 
+                return true;
+            }
+
+            // Casilla ocupada
+            return false;
+        }
+
+        public void Reset()
+        {
+            Positions = new int[8];
+        }
+
+        public int[] GetPositions()
+        {
+            return Positions;
+        }
     }
 }
