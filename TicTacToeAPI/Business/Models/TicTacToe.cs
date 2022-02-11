@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Business.Util;
 
 namespace TicTacToeBusiness.Models
 {
     public class TicTacToe
     {
-        TicTacToe _ticTacToe;
-        int _tokenPlayed = 0;
+
         public TicTacToe()
         {
             Board = new Board();
 
             Players = new List<Player>
             {
+                //SIEMPRE VA A SER PAR
                 new Player ("Jugador 1", Token.Cross),
+                //SIEMPRE VA A SER IMPAR
                 new Player ("Jugador 2", Token.Circle)
             };
         }
@@ -25,44 +27,59 @@ namespace TicTacToeBusiness.Models
         // 3 4 5
         // 6 7 8
 
-        public void Start()
-        {
-            _ticTacToe = new TicTacToe();
-        }
-
-        public string Play(Player player, int position)
+        public int Play(Player player, int position)
         {
             try
             {
-                var message = _ticTacToe.Board.AddToken(player, position);
+                Board.AddToken(player, position);
+            }
+            catch (InvalidPositionException)
+            {
+                return 4;
+            }
+            catch (PositionHeldException)
+            {
+                return 5;
+            }
 
-                _tokenPlayed++;
+            int tokensPlayed = Board.CountTokensPlayed();
 
-                if (_tokenPlayed >= 5)
+            if (tokensPlayed >= 5)
+            {
+                if (CheckWinner(player, Board))
                 {
-                    if (CheckWinner(player, _ticTacToe.Board))
+                    if ((int)player.Token == 1)
                     {
-                        return "El ganador es: " + player.Name;
+                        //GANO CROSS
+                        return 1;
                     }
-                    if (_tokenPlayed == 9)
-                    {
-                        //Start();
-                        return "Hubo un empate";
-                    }
+                    //GANO CIRCULO
+                    return 3;
                 }
-                return message;
+                if (tokensPlayed == 9)
+                {
+                    //HUBO UN EMPATE
+                    return 2;
+                }
             }
-            catch (InvalidPositionException ex)
-            {
-                return ex.Message;
-            }
-            catch (PositionHeldException ex)
-            {
-                return ex.Message;
-            }
-
-
+            //SIGUE EL JUEGO
+            return 0;
         }
+
+        public Player GetNextPlayer()
+        {
+            var player1 = Players.First();
+            var player2 = Players.Last();
+
+            int tokenCount = Board.CountTokensPlayed();
+            if ((tokenCount % 2) == 0)
+            {
+                return player1;
+            }
+
+            return player2;
+        }
+
 
         public bool CheckWinner(Player lastPlayer, Board board)
         {

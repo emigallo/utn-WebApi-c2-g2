@@ -8,6 +8,6 @@ namespace Business.Util
 {
     internal class InvalidPositionException : Exception
     {
-
+        
     }
 }

@@ -8,12 +8,12 @@ namespace TicTacToeBusiness
     {
         public Board()
         {
-            Positions = new int[8];
+            Positions = new int[9];
         }
 
         private int[] Positions { get; set; }
 
-        public string AddToken(Player player, int position)
+        public bool AddToken(Player player, int position)
         {
             if (position < 0 || position > 8)
             {
@@ -24,21 +24,34 @@ namespace TicTacToeBusiness
             {
                 Positions[position] = ((int)player.Token);
 
-                return "Ficha colocada, turno del siguiente jugador";
+                return true;
             }
 
             // Casilla ocupada
             throw new PositionHeldException();  
-
         }
 
         public void Reset()
         {
-            Positions = new int[8];
+            Positions = new int[9];
+        }
+
+        public int CountTokensPlayed()
+        {
+            int countTokens = 0;
+            foreach (int item in Positions)
+            {
+                if(item != 0)
+                {
+                    countTokens++;
+                }
+            }
+            return countTokens;
         }
 
         public int[] GetPositions()
         {
+
             return Positions;
         }
     }
