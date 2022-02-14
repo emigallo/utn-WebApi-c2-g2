@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Business.Models;
 using Business.Util;
 
 namespace TicTacToeBusiness.Models
@@ -27,7 +28,7 @@ namespace TicTacToeBusiness.Models
         // 3 4 5
         // 6 7 8
 
-        public int Play(Player player, int position)
+        public GameStatus Play(Player player, int position)
         {
             try
             {
@@ -35,35 +36,35 @@ namespace TicTacToeBusiness.Models
             }
             catch (InvalidPositionException)
             {
-                return 4;
+                return GameStatus.InvalidPosition;
             }
             catch (PositionHeldException)
             {
-                return 5;
+                return GameStatus.PositionHeld;
             }
 
+            return CheckGameStatus(player);
+        }
+
+        private GameStatus CheckGameStatus(Player player)
+        {
             int tokensPlayed = Board.CountTokensPlayed();
 
             if (tokensPlayed >= 5)
             {
                 if (CheckWinner(player, Board))
                 {
-                    if ((int)player.Token == 1)
-                    {
-                        //GANO CROSS
-                        return 1;
-                    }
-                    //GANO CIRCULO
-                    return 3;
+    
+                       return GameStatus.Winner;
                 }
                 if (tokensPlayed == 9)
                 {
                     //HUBO UN EMPATE
-                    return 2;
+                    return GameStatus.Tie;
                 }
             }
             //SIGUE EL JUEGO
-            return 0;
+            return GameStatus.Active;
         }
 
         public Player GetNextPlayer()
@@ -78,6 +79,16 @@ namespace TicTacToeBusiness.Models
             }
 
             return player2;
+        }
+
+        public Player GetLastPlayer()
+        {
+            if (GetNextPlayer() == Players.First())
+            {
+                return Players.Last();
+            }
+
+            return Players.First();
         }
 
 
