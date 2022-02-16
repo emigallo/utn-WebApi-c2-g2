@@ -16,26 +16,26 @@ namespace Test
         {
             var ticTacToe = new TicTacToe();         
             
-            ticTacToe.Play(ticTacToe.GetNextPlayer(), 0);
-            ticTacToe.Play(ticTacToe.GetNextPlayer(), 1);
-            ticTacToe.Play(ticTacToe.GetNextPlayer(), 2);
-            ticTacToe.Play(ticTacToe.GetNextPlayer(), 3);
+            ticTacToe.Play(0);
+            ticTacToe.Play(1);
+            ticTacToe.Play(2);
+            ticTacToe.Play(3);
             // Chack ganador
-            var status = ticTacToe.Play(ticTacToe.GetNextPlayer(), 4);
+            var status = ticTacToe.Play(4);
             if (status != GameStatus.Active)
             {
                 Assert.Fail();
             }
             else
             {
-                status = ticTacToe.Play(ticTacToe.GetNextPlayer(), 5);
+                status = ticTacToe.Play(5);
                 if (status != GameStatus.Active)
                 {
                     Assert.Fail();
                 }
                 else
                 {
-                    status = ticTacToe.Play(ticTacToe.GetNextPlayer(), 6);
+                    status = ticTacToe.Play(6);
 
                     if (status == GameStatus.Winner)
                     {

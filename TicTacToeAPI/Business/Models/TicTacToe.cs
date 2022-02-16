@@ -6,7 +6,6 @@ namespace TicTacToeBusiness.Models
 {
     public class TicTacToe
     {
-
         public TicTacToe()
         {
             Board = new Board();
@@ -20,15 +19,18 @@ namespace TicTacToeBusiness.Models
             };
         }
 
-        private Board Board { get; init; }
+        // REVISAR
+        public Board Board { get; set; }
         private List<Player> Players { get; init; }
 
         // 0 1 2 
         // 3 4 5
         // 6 7 8
 
-        public GameStatus Play(Player player, int position)
+        public GameStatus Play(int position)
         {
+            Player player = GetNextPlayer();
+
             GameStatus status = Board.AddToken(player, position);
             
             if (status == GameStatus.PositionHeld || status == GameStatus.InvalidPosition)

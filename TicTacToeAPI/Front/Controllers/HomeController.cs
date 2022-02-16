@@ -1,11 +1,8 @@
-﻿using Front.Models;
+﻿using Business.Models;
+using Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Front.Controllers
 {
@@ -18,9 +15,25 @@ namespace Front.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var model = new TicTacToeViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Play(TicTacToeViewModel model, int position)
+        {
+            GameStatus gameStatus = model.TicTacToe.Play(position);
+            
+            if (gameStatus == GameStatus.Active)
+            {
+                return View("Index", model);
+            }
+
+            return View("Index", model);
         }
 
         public IActionResult Privacy()
