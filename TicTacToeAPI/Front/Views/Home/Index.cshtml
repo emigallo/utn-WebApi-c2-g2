@@ -1,0 +1,53 @@
+﻿@model Front.Models.TicTacToeViewModel
+
+@using (Html.BeginForm("Play", "Home", FormMethod.Post))
+{ 
+    <label id="textLabel">@Model.Result</label>
+    <div>
+        @foreach (List<string> row in Model.Rows)
+        {
+            <div class="row">
+                @foreach (string item in row)
+                {
+                    <button type="submit" id="@item" style="width: 200px; height: 200px;" @*onclick="change(@item)"*@ data-value="@item"> - </button>
+                    
+                }
+            </div>
+        }
+    </div>
+
+    <input style="visibility:hidden;" class="lastInput" name="position" />
+
+    <input style="visibility:hidden;" class="lastInput" name="@Model.Prueba" />
+
+<script>
+
+    window.localStorage.setItem('payerid', '1')
+
+    function change(idButton) {
+        var casilla = document.getElementById(idButton);
+
+        var id = window.localStorage.getItem('payerid');
+        if (id == '1') {
+            casilla.innerHTML = 'X';
+            casilla.disabled = true;
+            window.localStorage.setItem('payerid', '2');
+        }
+        else {
+            casilla.innerHTML = 'O';
+            casilla.disabled = true;
+            window.localStorage.setItem('payerid', '1');
+        }
+    }
+
+    window.addEventListener('load', (event) => {
+
+        document.querySelectorAll('button').forEach(function (item) {
+            item.addEventListener('click', (event) => {
+                document.querySelector('#textLabel').innerHTML += event.target.dataset.value;
+                document.querySelector('.lastInput').value = event.target.dataset.value;
+            });
+        });
+    });
+</script>
+}
