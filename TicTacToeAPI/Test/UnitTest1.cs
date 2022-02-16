@@ -1,7 +1,6 @@
-using NUnit.Framework;
-using System.Collections.Generic;
-using TicTacToeBusiness.Models;
 using Business.Models;
+using NUnit.Framework;
+using TicTacToeBusiness.Models;
 
 namespace Test
 {
@@ -15,8 +14,7 @@ namespace Test
         [Test]
         public void WinnerTestCross()
         {
-            TicTacToe ticTacToe = new TicTacToe();
-         
+            var ticTacToe = new TicTacToe();         
             
             ticTacToe.Play(ticTacToe.GetNextPlayer(), 0);
             ticTacToe.Play(ticTacToe.GetNextPlayer(), 1);
@@ -46,14 +44,9 @@ namespace Test
                     else
                     {
                         Assert.Fail();
-                    }
-                   
+                    }                   
                 }
-
-
             }
-
-
         }
 
         //[Test]

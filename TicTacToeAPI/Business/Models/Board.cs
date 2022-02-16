@@ -1,5 +1,4 @@
-﻿using Business.Util;
-using System;
+﻿using Business.Models;
 using TicTacToeBusiness.Models;
 
 namespace TicTacToeBusiness
@@ -13,22 +12,21 @@ namespace TicTacToeBusiness
 
         private int[] Positions { get; set; }
 
-        public bool AddToken(Player player, int position)
+        public GameStatus AddToken(Player player, int position)
         {
             if (position < 0 || position > 8)
             {
-                throw new InvalidPositionException();
+                return GameStatus.InvalidPosition;
             }
 
             if (Positions[position] == 0)
             {
                 Positions[position] = ((int)player.Token);
 
-                return true;
+                return GameStatus.Active;
             }
 
-            // Casilla ocupada
-            throw new PositionHeldException();  
+            return GameStatus.PositionHeld;  
         }
 
         public void Reset()
@@ -46,12 +44,12 @@ namespace TicTacToeBusiness
                     countTokens++;
                 }
             }
+
             return countTokens;
         }
 
         public int[] GetPositions()
         {
-
             return Positions;
         }
     }

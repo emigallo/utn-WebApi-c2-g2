@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Business.Models;
+using System.Collections.Generic;
 using System.Linq;
-using Business.Models;
-using Business.Util;
 
 namespace TicTacToeBusiness.Models
 {
@@ -14,15 +13,15 @@ namespace TicTacToeBusiness.Models
 
             Players = new List<Player>
             {
-                //SIEMPRE VA A SER PAR
+                // SIEMPRE VA A SER PAR
                 new Player ("Jugador 1", Token.Cross),
-                //SIEMPRE VA A SER IMPAR
+                // SIEMPRE VA A SER IMPAR
                 new Player ("Jugador 2", Token.Circle)
             };
         }
 
-        private Board Board { get; set; }
-        private List<Player> Players { get; set; }
+        private Board Board { get; init; }
+        private List<Player> Players { get; init; }
 
         // 0 1 2 
         // 3 4 5
@@ -30,19 +29,13 @@ namespace TicTacToeBusiness.Models
 
         public GameStatus Play(Player player, int position)
         {
-            try
+            GameStatus status = Board.AddToken(player, position);
+            
+            if (status == GameStatus.PositionHeld || status == GameStatus.InvalidPosition)
             {
-                Board.AddToken(player, position);
+                return status;
             }
-            catch (InvalidPositionException)
-            {
-                return GameStatus.InvalidPosition;
-            }
-            catch (PositionHeldException)
-            {
-                return GameStatus.PositionHeld;
-            }
-
+            
             return CheckGameStatus(player);
         }
 
@@ -54,23 +47,21 @@ namespace TicTacToeBusiness.Models
             {
                 if (CheckWinner(player, Board))
                 {
-    
-                       return GameStatus.Winner;
+                    return GameStatus.Winner;
                 }
                 if (tokensPlayed == 9)
                 {
-                    //HUBO UN EMPATE
                     return GameStatus.Tie;
                 }
             }
-            //SIGUE EL JUEGO
+
             return GameStatus.Active;
         }
 
         public Player GetNextPlayer()
         {
-            var player1 = Players.First();
-            var player2 = Players.Last();
+            Player player1 = Players.First();
+            Player player2 = Players.Last();
 
             int tokenCount = Board.CountTokensPlayed();
             if ((tokenCount % 2) == 0)
@@ -141,21 +132,5 @@ namespace TicTacToeBusiness.Models
 
             return false;
         }
-
-        //PREGUNTA A EMI POR LE NOMBRE
-        //public bool CheckTie(Board board)
-        //{
-        //    int[] posiciones = board.GetPositions();
-
-        //    foreach (int item in posiciones)
-        //    {
-        //        if (item == 0)
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    return true;
-        //}
     }
 }
