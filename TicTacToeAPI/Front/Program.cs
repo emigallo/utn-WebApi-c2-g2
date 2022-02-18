@@ -22,5 +22,6 @@ namespace Front
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
