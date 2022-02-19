@@ -1,8 +1,7 @@
-﻿using Business.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TicTacToeBusiness.Models
+namespace Business.Models
 {
     public class TicTacToe
     {

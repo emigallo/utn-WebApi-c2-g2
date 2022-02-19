@@ -1,6 +1,5 @@
 using Business.Models;
 using NUnit.Framework;
-using TicTacToeBusiness.Models;
 
 namespace Test
 {

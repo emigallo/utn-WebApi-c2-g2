@@ -1,4 +1,4 @@
-﻿namespace TicTacToeBusiness.Models
+﻿namespace Business.Models
 {
     public class Player
     {

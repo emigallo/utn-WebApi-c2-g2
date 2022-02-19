@@ -1,7 +1,6 @@
 ﻿using Business.Models;
-using TicTacToeBusiness.Models;
 
-namespace TicTacToeBusiness
+namespace Business
 {
     public class Board
     {
