@@ -1,6 +1,4 @@
-﻿using Business.Models;
-
-namespace Business
+﻿namespace Business.Models
 {
     public class Board
     {

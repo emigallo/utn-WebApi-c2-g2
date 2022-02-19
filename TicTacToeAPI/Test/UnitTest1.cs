@@ -19,7 +19,8 @@ namespace Test
             ticTacToe.Play(1);
             ticTacToe.Play(2);
             ticTacToe.Play(3);
-            // Chack ganador
+            
+            // Check ganador
             var status = ticTacToe.Play(4);
             if (status != GameStatus.Active)
             {
