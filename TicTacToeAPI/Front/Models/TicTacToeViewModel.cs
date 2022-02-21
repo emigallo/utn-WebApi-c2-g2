@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Business.Models;
+﻿using Business.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Front.Models
 {
@@ -15,22 +16,28 @@ namespace Front.Models
             };
 
             TicTacToe = new TicTacToe();
+
             Positions = new int[9];
         }
-        public int[] Positions { get; set; }
+
         public List<List<string>> Rows { get; set; }
-        public string Result { get; set; }
         public TicTacToe TicTacToe { get; set; }
-        public string Prueba { get; set; }
+        public int[] Positions { get; set; }
+        public string Result { get; set; }
 
-        public string ValidToken(string item ) {
+        public string ValidToken(string item) {
 
-            if(Positions[System.Convert.ToInt32(item)] == 1) 
-            { return "X"; };
-            if (Positions[System.Convert.ToInt32(item)] == 2)
-            { return "O"; };
-            return "-";
-        
+            if(Positions[Convert.ToInt32(item)] == 1) 
+            { 
+                return "X"; 
+            };
+            
+            if (Positions[Convert.ToInt32(item)] == 2)
+            {
+                return "O"; 
+            };
+            
+            return "-";        
         }
     }
 }

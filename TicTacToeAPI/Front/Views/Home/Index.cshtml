@@ -1,35 +1,38 @@
 ﻿@model Front.Models.TicTacToeViewModel
 
-    @Html.DisplayFor(m => m.Result)
-    @using (Html.BeginForm("Play", "Home", FormMethod.Post))
-    {
+@Html.DisplayFor(m => m.Result)
 
-        <div>
-            @foreach (List<string> row in Model.Rows)
-            {
-                <div class="row">
-                    @foreach (string item in row)
-                    {
-                        <button type="submit" id="@item" style="width: 200px; height: 200px;" data-value="@item"> @Model.ValidToken(item)  </button>
+@using (Html.BeginForm("Play", "Home", FormMethod.Post))
+{
+    <div>
+        @foreach (List<string> row in Model.Rows)
+        {
+            <div class="row">
+                @foreach (string item in row)
+                {
+                    <button type="submit" id="@item" style="width: 200px; height: 200px;" data-value="@item"> 
+                        @Model.ValidToken(item)  
+                    </button>
+                }
+            </div>
+        }
+    </div>
 
-                    }
-                </div>
-            }
-        </div>
-
-        @Html.HiddenFor(m => m.Positions)
-        <input style="visibility:hidden;" id="lastInput" name="lastInput" />
-        <br />
-        <button type="button">@Html.ActionLink("Reset", "Index", "Home")  </button>
-        <script>
-            window.addEventListener('load', (event) => {
-                document.querySelectorAll('button').forEach(function (item) {
-                    item.addEventListener('click', (event) => {
-                        document.querySelector('#lastInput').value = event.target.dataset.value;
-                    });
+    @Html.HiddenFor(m => m.Positions)
+    
+    <input style="visibility:hidden;" id="lastInput" name="lastInput" />
+    
+    <br />
+    
+    <button type="button">@Html.ActionLink("Reset", "Index", "Home")</button>
+    
+    <script>
+        window.addEventListener('load', (event) => {
+            document.querySelectorAll('button').forEach(function (item) {
+                item.addEventListener('click', (event) => {
+                    document.querySelector('#lastInput').value = event.target.dataset.value;
                 });
             });
-
-        </script>
-
-    }
+        });
+    </script>
+}
