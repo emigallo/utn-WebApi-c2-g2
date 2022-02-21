@@ -7,7 +7,7 @@
             Positions = new int[9];
         }
 
-        private int[] Positions { get; set; }
+        public int[] Positions { get; set; }
 
         public GameStatus AddToken(Player player, int position)
         {

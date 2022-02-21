@@ -24,21 +24,37 @@ namespace Front.Controllers
             var model = new TicTacToeViewModel();
 
             HttpContext.Session.Set<TicTacToeViewModel>("Clave",model);
-
+            model.Result = "Juega Jugador 1";
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Play(string idButton)
+        public IActionResult Play(string lastInput)
         {
             TicTacToeViewModel model = HttpContext.Session.Get<TicTacToeViewModel>("Clave");
 
-            GameStatus gameStatus = model.TicTacToe.Play(Convert.ToInt32(idButton));
+            model.TicTacToe.Board.Positions = model.Positions;
+            GameStatus gameStatus = model.TicTacToe.Play(Convert.ToInt32(lastInput));
 
+            model.Positions = model.TicTacToe.Board.GetPositions();
             HttpContext.Session.Set<TicTacToeViewModel>("Clave", model);
-
+            var player = model.TicTacToe.GetNextPlayer();
             if (gameStatus == GameStatus.Active)
             {
+
+                model.Result = "Juega " + player.Name;
+
+                return View("Index", model);
+            }
+            if (gameStatus == GameStatus.Winner)
+            {
+                player = model.TicTacToe.GetLastPlayer();
+                model.Result = "Ganador " + player.Name;
+                return View("Index", model);
+            }
+            if (gameStatus == GameStatus.PositionHeld)
+            {
+                model.Result = "Posición ocupada elija otra";
                 return View("Index", model);
             }
 
